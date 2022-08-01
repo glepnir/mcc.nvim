@@ -15,6 +15,8 @@ config your filetypes with char rules
 ```lua
 require('mcc').setup({
   c = {'-','->','-'},
+  -- also like this
+  c = {'-','->','-','-----','-------'},
   go = { ';',':=',';'},
   rust = {';','::',';'},
   -- also support mulitple rules

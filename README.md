@@ -27,4 +27,8 @@ require('mcc').setup({
 })
 ```
 
+## Show
+
+![image](https://user-images.githubusercontent.com/41671631/182332280-813dd765-6b77-4f56-904d-0053aaa22c80.gif)
+
 ## Licenese MIT

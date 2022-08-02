@@ -36,7 +36,7 @@ function mcc:create_autocmd(ft, rules)
 			vim.keymap.set("i", rules[1], function()
 				local key, times = self:magic_char(rules)
 				return delete_keys(times) .. key
-			end, { expr = true, silent = true, noremap = true, replace_keycodes = false, buffer = true })
+			end, { expr = true, silent = true, replace_keycodes = true, buffer = true })
 		end,
 	})
 end

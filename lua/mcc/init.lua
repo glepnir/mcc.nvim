@@ -6,7 +6,6 @@ function mcc:magic_char(rules)
 	local content = api.nvim_get_current_line()
 	for i, v in pairs(rules) do
 		local target = content:sub(col - #v + 1, col)
-		target = target:gsub("%s+", "")
 		if target == v then
 			if i ~= #rules then
 				return rules[i + 1], #v

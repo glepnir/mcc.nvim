@@ -4,21 +4,31 @@ local mcc = {}
 function mcc:magic_char(rules)
 	local col = api.nvim_win_get_cursor(0)[2]
 	local content = api.nvim_get_current_line()
-	for i, v in pairs(rules) do
-		local target = content:sub(col - #v + 1, col)
-		if target == v then
-			if i ~= #rules then
-				return rules[i + 1], #v
-			else
-				return rules[1], #v
+	local change, times = rules[2], 0
+	local target_list = {}
+	for _, v in pairs(rules) do
+		table.insert(target_list, content:sub(col - #v + 1, col))
+	end
+
+	local pos = 0
+	for _, target in pairs(target_list) do
+		for j, rule in pairs(rules) do
+			if target == rule then
+				pos = j
 			end
 		end
 	end
-	return rules[2]
+
+	if pos ~= 0 then
+		local index = pos == #rules and 1 or pos + 1
+		change = rules[index]
+		times = #rules[pos]
+	end
+	return change, times
 end
 
 local function delete_keys(times)
-	if times ~= nil then
+	if times ~= 0 then
 		return string.rep("<BS>", times)
 	end
 	return ""

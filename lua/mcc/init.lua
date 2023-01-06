@@ -8,11 +8,9 @@ function mcc:magic_char(rules)
   local lnum, col = unpack(api.nvim_win_get_cursor(0))
   local content = api.nvim_get_current_line()
   local diagnostics = vim.diagnostic.get(0, { lnum = lnum - 1 })
-  for _, diag in pairs(diagnostics) do
-    if vim.tbl_contains(self.ignore_keyword[vim.bo.filetype], diag.source) then
-      return rules[1], 0
-    end
-  end
+  print(vim.inspect(diagnostics))
+  local data = vim.treesitter.get_node_at_pos(0, lnum - 1, col, {})
+  print(data:type(), data:named(), data:id(), data:symbol())
 
   local change, times = rules[2], 0
   local target_list = {}
@@ -61,6 +59,10 @@ function mcc:create_autocmd(ft, rules)
 end
 
 function mcc.setup(rules)
+  if true then
+    vim.notify('please use glepnir/mutchar.nvim instead')
+    return
+  end
   vim.validate({
     rules = { rules, "t" },
   })
